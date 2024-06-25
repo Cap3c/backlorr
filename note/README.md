@@ -46,8 +46,8 @@ optionnel completer decription (peut etre reutiliser)       -> POST IntAnsStr2  
 
 creer table (creation de table correspondant a description) -> POST create_table    (use desc_categorie dans body) (save id)
 
-creer permission (donne a un user de l'organisme un accee aux donnee d'une table)
-(value correspond a la permission donnee pour chaque description de la table en binaire en fonction du CRUD.
+creer permission (attribut a un user de l'organisme un accee aux donnees d'une table)
+(value correspond a la permission attribuee pour chaque description de la table en binaire en fonction du CRUD.
 ex: '4e' -> 0100 1110 -> _R__ CRU_ -> il y a 2 elements dans la decription et l'utilisateur peut lire le premier et ajouter, lire et mettre a jour le second. ou l'inverse) 
 (l'admin n'a pas accee aux donnees des tables)              -> POST new permission   (use user_id et table_id)
 
