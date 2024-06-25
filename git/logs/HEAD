@@ -1,0 +1,8 @@
+0000000000000000000000000000000000000000 70a506a37bdbb6affb06adc86b5a84b87c6cf003 Debian <debian@bureau.cap3c.net> 1695127134 -0500	clone: from github.com:asterix-e42/LORR1.git
+70a506a37bdbb6affb06adc86b5a84b87c6cf003 19ac1417681a4137855744fdc4b47cfbc4c722f8 Debian <debian@bureau.cap3c.net> 1695290023 -0500	commit: update version
+19ac1417681a4137855744fdc4b47cfbc4c722f8 ba73fdd9f84b1a8dd7b0f1001273f6f913f86aa5 Debian <debian@debian11.linuxvmimages.local> 1695742262 -0500	commit (merge): merge
+ba73fdd9f84b1a8dd7b0f1001273f6f913f86aa5 e563542786b0c5b8044944fcdc585f996b363a59 Debian <debian@debian11.linuxvmimages.local> 1695742296 -0500	pull: Merge made by the 'recursive' strategy.
+e563542786b0c5b8044944fcdc585f996b363a59 0000000000000000000000000000000000000000 Debian <debian@debian11.linuxvmimages.local> 1704878823 -0600	Branch: renamed refs/heads/main to refs/heads/main
+e563542786b0c5b8044944fcdc585f996b363a59 e563542786b0c5b8044944fcdc585f996b363a59 Debian <debian@debian11.linuxvmimages.local> 1704878823 -0600	Branch: renamed refs/heads/main to refs/heads/main
+e563542786b0c5b8044944fcdc585f996b363a59 0000000000000000000000000000000000000000 Debian <debian@debian11.linuxvmimages.local> 1704878919 -0600	Branch: renamed refs/heads/main to refs/heads/main
+e563542786b0c5b8044944fcdc585f996b363a59 e563542786b0c5b8044944fcdc585f996b363a59 Debian <debian@debian11.linuxvmimages.local> 1704878919 -0600	Branch: renamed refs/heads/main to refs/heads/main

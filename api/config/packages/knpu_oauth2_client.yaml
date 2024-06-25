@@ -1,0 +1,23 @@
+# config/packages/knpu_oauth2_client.yaml
+knpu_oauth2_client:
+    clients:
+        # will create service: "knpu.oauth2.client.authentik"
+        # an instance of: KnpU\OAuth2ClientBundle\Client\OAuth2Client
+        Keycloak:
+            use_state: false
+            type: generic
+            provider_class: App\KeyOauth2\KeycloakProvider
+
+            # optional: a class that extends OAuth2Client
+            # client_class: Some\Custom\Client
+
+            # optional: if your provider has custom constructor options
+            # provider_options: {}
+
+            # now, all the normal options!
+            client_id: '%env(keycloak_client_id)%'
+            client_secret: '%env(keycloak_client_secret)%'
+            redirect_route: keycloak_check
+            redirect_params: {}
+            # whether to check OAuth2 "state": defaults to true
+            # use_state: true

@@ -1,0 +1,105 @@
+security:
+    # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
+    password_hashers:
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+
+    # https://symfony.com/doc/current/security/authenticator_manager.html
+    #enable_authenticator_manager: true
+
+    # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+    
+    providers:
+        # used to reload user from session & other features (e.g. switch_user)
+        #app_user_auth:
+        #    entity:
+        #        class: App\Entity\User
+        #        property: email
+         app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
+                  #property: username
+                  #todo change but it doesnt work without it
+
+                    #enable_authenticator_manager: true
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+            provider: app_user_provider
+        api:
+            pattern: ^/api
+            stateless: true
+            provider: app_user_provider
+            jwt: ~
+
+
+        oauth:
+            pattern: ^/koauth2
+            custom_authenticators:
+                - App\KeyOauth2\KeycloakConnect
+                #- App\KeyOauth2\KeycloakVerif
+            
+
+        auth:
+            pattern: ^/auth
+            provider: app_user_provider
+            json_login:
+                check_path: auth # The name in routes.yaml is enough for mapping
+                  #email_path: email
+                username_path: email
+                password_path: password
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+
+
+        main:
+
+            #jwt: ~
+            #lazy: true
+            custom_authenticators:
+                - App\KeyOauth2\VerifEmail
+                #- App\KeyOauth2\KeycloakConnect
+            #  - App\Security\Authentik2
+            stateless: true
+            security: true
+            provider: app_user_provider
+
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#the-firewall
+
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    role_hierarchy:
+        ROLE_cap3c_support_tech: ROLE_ALLOWED_TO_SWITCH
+        ROLE_orga_user: ROLE_INTERACT_BASE
+        ROLE_cap3c_R&D: [ROLE_INTERACT_BASE, ROLE_CREATE_BASE]
+        ROLE_orga_admin: [ROLE_CREATE_BASE, ROLE_ADMIN]
+
+    access_control:
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/auth, roles: PUBLIC_ACCESS }
+        - { path: ^/oauth2, roles: PUBLIC_ACCESS }
+        - { path: ^/koauth2, roles: PUBLIC_ACCESS }
+        - { path: ^/login, roles: PUBLIC_ACCESS }
+        - { path: ^/support, roles: ROLE_cap3c_support_tech }
+        - { path: ^/docs, roles: PUBLIC_ACCESS } # Allows accessing API documentations and Swagger UI docs
+        - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
+          #- { path: ^/, roles: PUBLIC_ACCESS }
+
+when@test:
+    security:
+        password_hashers:
+            # By default, password hashers are resource intensive and take time. This is
+            # important to generate secure password hashes. In tests however, secure hashes
+            # are not important, waste resources and increase test times. The following
+            # reduces the work factor to the lowest possible values.
+            Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
+                algorithm: auto
+                cost: 4 # Lowest possible value for bcrypt
+                time_cost: 3 # Lowest possible value for argon
+                memory_cost: 10 # Lowest possible value for argon

@@ -1,0 +1,5 @@
+d7184ab1981ca96e122bd6a0c3bf08f6dcabf984		branch 'main' of github.com:asterix-e42/LORR1
+1d88965c7b478fa71e1028558dfe564836d853e3	not-for-merge	branch 'api-platform-3.1' of github.com:asterix-e42/LORR1
+5d876c4e390b7c3896e4674eeb94cca008371ed3	not-for-merge	branch 'dependabot/github_actions/actions/checkout-4' of github.com:asterix-e42/LORR1
+27b91efdc3ee5dcefd05d9daf111d02f6e1463d6	not-for-merge	branch 'dependabot/github_actions/docker/bake-action-4' of github.com:asterix-e42/LORR1
+0decf231715b12c46c2e6510ca289d70d74a5e90	not-for-merge	branch 'dependabot/github_actions/docker/setup-buildx-action-3' of github.com:asterix-e42/LORR1
