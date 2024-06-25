@@ -6,7 +6,7 @@
 
 #tls internal # generate self certificate
 
-http://192.168.1.70:9001, http://localhost:9001 {
+http://192.168.1.70:8080, http://localhost:8080 {
     #{$SERVER_NAME}
 
     log

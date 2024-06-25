@@ -55,10 +55,10 @@ security:
 
         main:
 
-            #jwt: ~
-            #lazy: true
-            custom_authenticators:
-                - App\KeyOauth2\VerifEmail
+            jwt: ~
+            lazy: true
+              #custom_authenticators:
+              #  - App\KeyOauth2\VerifEmail
                 #- App\KeyOauth2\KeycloakConnect
             #  - App\Security\Authentik2
             stateless: true
