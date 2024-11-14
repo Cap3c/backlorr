@@ -56,8 +56,8 @@ security:
         main:
 
             jwt: ~
-            custom_authenticators:
-                - App\KeyOauth2\VerifEmail
+              #custom_authenticators:
+              #  - App\KeyOauth2\VerifEmail
                 #- App\KeyOauth2\KeycloakConnect
             #  - App\Security\Authentik2
             entry_point : App\KeyOauth2\VerifEmail

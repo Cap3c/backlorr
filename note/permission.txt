@@ -1,0 +1,94 @@
+//-------------------------symbole--------------------
+
+% un fait a propos de l’entité
++ un fait a propos d'un role
+- une action
+# une action qui envoie un mail
+
+//--------------------------user---------------------
+
+organisme: [groupe crée par cap3c, dans lesquels tout les users font partie]
+  %unique admin(ROLE_orga_admin) définit lors de la creation de l'organisme
+  %plusieurs users(ROLE_orga_user), crée par admin(ROLE_orga_admin)
+
+user: [individu connecte]
+  %membre d'un organisme
+  %paramètre définit a la creation
+  %possède paramètres modifiables (mdp)
+  %possède paramètres immodifiables (nom, adresse mél)
+  -accéder paramètre (nom, adresse mél)
+  -changer paramètre modifiable (mdp)
+
+//---------------------------data--------------------
+
+table: [définie ou sont stockées les données]
+  %appartient que un ROLE_orga_admin écriture/lecture
+  %créable que par ROLE_orga_admin
+  %partageable ou non a tout le monde lecture seule (prive/public)
+  %partageable lecture seule si prive a un utilisateur ROLE_orga_admin->ROLE_orga_admin
+  %possède une description
+  -créer tableDynamique associée
+  -définir permission ROLE_orga_admin->ROLE_orga_user
+
+description: [définie comment sont ordonne les données]
+  %appartient a un ROLE_orga_admin
+  %immodifiable
+  %créable que par ROLE_orga_admin
+  %consultable que par ROLE_orga_admin
+  %partageable ou non a tout le monde lecture seule (prive/public)
+  %partageable lecture seule si prive a un utilisateur ROLE_orga_admin->ROLE_orga_admin
+  
+tableDynamique: [ou sont stocker les données]
+  %utilisable que par ROLE_orga_user
+
+graph/doc: [aspect visuel] pas present
+  %appartient a un user
+  %créable que par ROLE_orga_user
+  %consultable que par ROLE_orga_user
+  %partageable (prive, orga, public, user)  user->user user->group
+  -permission user->ROLE_orga_user
+
+log: pas present
+  %écriture lors d'une action
+  %consultable par ROLE_orga_admin
+  %gauge de fiabilité ((donnée modifiée/donnée brut) *100)
+
+//----------------------- ROLE ----------------------
+
+ROLE_orga_admin:[crée en meme temps que l’organisme et est le compte qui administre l’organisme]
+  -payer (license)                                                                                           
+  -créer ROLE_orga_user(nb : license)                                                                         
+  -consulter liste de tout ROLE_orga_user                                                                    
+  -consulter paramétrage ROLE_orga_user(address mél, nom)                                       
+  -modifier paramètre ROLE_orga_user(address mél, nom)                                                        -réinitialiser mdp (ROLE_orga_user)                                                                           
+  -créer table (nb : license)                                                                                   
+  -changer/créer permission table                                                                               
+  +posséder bibliothèque de graphs/document                                                                     
+  -changer paramétrage des connexions(gdr)                                                                      
+  -créer description                                                                                            
+  -partager description                                                                                         
+
+ROLE_orga_user:[role de la majorité des utilisateurs, ce sont eux qui utilisent les données]
+  +posséder permission individuel lecture et/ou écriture                                                        
+    -rajouter/importer/ sur les table                                                                           
+    -lire les bases(+demande de changer les données erroné)                                        
+  +posséder bibliothèque de graphs/document                                                                   
+  -partager graph/doc a un utilisateur tierce                                                                   
+  +posséder tableau de bord                                                                                      
+  -créer graph/doc                                                                                              
+  
+ROLE_cap3c_support_tech:[un des roles de cap3c, ils ont des droits similaire aux ROLE_orga_admin, sur des organisme different du leur]
+  #prendre contrôle organisme sur demande, mail envoyer a l'admin                                     
+  #créer user (nb : license)                                                                                   
+  #modifier user                                                                                               
+  #réinitialiser mdp (ROLE_orga_admin)                                                                        
+  #créer table (nb : license)                                                                                  
+  #changer permission table                                                                                    
+  +ne peut rien possède
+  -créer Organisme                                                                                           
+
+ROLE_cap3c_R&D:[un des roles de cap3c, ils ont la capacité d’utilisé ~toute~ les données gdr, et ont les memes droits que ROLE_orga_user]
+  -créer description                                                                                          
+  -posséder permission de lecture sur toute les tables gdr                                                    
+  -posséder permission de modification majeur (utilisation rare, et en accord avec les organismes)            
+  ROLE_orga_user

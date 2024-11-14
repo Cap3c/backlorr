@@ -1,0 +1,1588 @@
+{
+	"info": {
+		"_postman_id": "66631030-12be-4b94-bd4d-7ec4a9209418",
+		"name": "loor1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29784955"
+	},
+	"item": [
+		{
+			"name": "define description",
+			"item": [
+				{
+					"name": "gets",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DN}}descs/2adf364e-4f1e-43c9-b666-9e2242c83dcf/IntAndStr",
+							"host": [
+								"{{DN}}descs"
+							],
+							"path": [
+								"2adf364e-4f1e-43c9-b666-9e2242c83dcf",
+								"IntAndStr"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DN}}descs",
+							"host": [
+								"{{DN}}descs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update meta",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"name\" : \"asda\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DN}}descs/4e2a17db-edcf-476c-8375-27f822625c4b/asd",
+							"host": [
+								"{{DN}}descs"
+							],
+							"path": [
+								"4e2a17db-edcf-476c-8375-27f822625c4b",
+								"asd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update is_public",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"partagePublic\": true\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DN}}descs/51792b27-66fe-4ddf-810a-8dafb68c3f23",
+							"host": [
+								"{{DN}}descs"
+							],
+							"path": [
+								"51792b27-66fe-4ddf-810a-8dafb68c3f23"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "shareDesc",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": 3,\r\n  \"shareId\": \"51792b27-66fe-4ddf-810a-8dafb68c3f23\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DN}}shareDesc",
+							"host": [
+								"{{DN}}shareDesc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ints",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"asdasd2\",\r\n  \"description\": \"string\",\r\n  \"descriptionarray\":\r\n\r\n   {\r\n   \"t_int1\": \"integer\",\r\n   \"t_int2\": \"integer\",\r\n   \"t_int3\": \"integer\",\r\n   \"t_int4\": \"integer\"\r\n  }\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DN}}descs/15b6f6dc-d07a-4104-9b4e-116290070760",
+							"host": [
+								"{{DN}}descs"
+							],
+							"path": [
+								"15b6f6dc-d07a-4104-9b4e-116290070760"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "IntAndStr",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"IntAndStr\",\r\n    \"description\": \"string\",\r\n    \"descriptionArray\":\r\n    {\r\n        \"t_int1\": \"integer\",\r\n        \"t_int2\": \"integer\",\r\n        \"t_int3\": \"integer\",\r\n        \"t_int4\": \"integer\",\r\n        \"t_str1\": \"text\",\r\n        \"t_str2\": \"text\",\r\n        \"t_str3\": \"text\",\r\n        \"t_str4\": \"text\",\r\n        \"t_float\": \"float\",\r\n        \"t_date\": \"date\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DN}}descs",
+							"host": [
+								"{{DN}}descs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "IntAndStr2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"categorie\": \"d9376a3f-6262-4743-9fe7-7c7ec7e3f748\",\r\n    \"name\": \"IntAndStr3\",\r\n    \"description\": \"string\",\r\n    \"descriptionArray\":\r\n    {\r\n        \"t_int1asd\": \"integer\",\r\n        \"t_int2\": \"integer\",\r\n        \"t_int3\": \"integer\",\r\n        \"t_str1\": \"text\",\r\n        \"t_str2\": \"text\",\r\n        \"t_str3\": \"text\",\r\n        \"t_str4\": \"text\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DN}}descs/199fb698-2d5e-4f10-a20a-52d8b7bbaffb",
+							"host": [
+								"{{DN}}descs"
+							],
+							"path": [
+								"199fb698-2d5e-4f10-a20a-52d8b7bbaffb"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "table",
+			"item": [
+				{
+					"name": "create_table",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"test6\",\r\n    \"categorie\": \"b603b2d1-de71-4f08-aa81-4154c76b8781\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DN}}tables",
+							"host": [
+								"{{DN}}tables"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "fill table",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"test1\",\r\n    \"categorie\": \"3a1260d8-2b0c-459d-8c13-fd78f7830207\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DN}}tables",
+							"host": [
+								"{{DN}}tables"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upload",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"test1\",\r\n    \"categorie\": \"113e50e2-5743-423e-a45a-c53bba5cef26\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DN}}/base_uploaders/305c21ea-80e0-46a9-bafd-5962eb6cf9cb",
+							"host": [
+								"{{DN}}"
+							],
+							"path": [
+								"base_uploaders",
+								"305c21ea-80e0-46a9-bafd-5962eb6cf9cb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "uploads",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"test1\",\r\n    \"categorie\": \"113e50e2-5743-423e-a45a-c53bba5cef26\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DN}}/base_uploaders",
+							"host": [
+								"{{DN}}"
+							],
+							"path": [
+								"base_uploaders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tables",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DN}}tables",
+							"host": [
+								"{{DN}}tables"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "table",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DN}}tables/c2f06508-dd88-4f03-a1ad-5f917cec04cf/IntAndStr",
+							"host": [
+								"{{DN}}tables"
+							],
+							"path": [
+								"c2f06508-dd88-4f03-a1ad-5f917cec04cf",
+								"IntAndStr"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "shareTable",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": \"6371a455-ee14-4a16-9bb5-2ac015a76936\",\r\n  \"shareId\": \"3d40a069-8f71-4616-9642-7dbc4097e93b\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DN}}shareTable",
+							"host": [
+								"{{DN}}shareTable"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "organisme",
+			"item": [
+				{
+					"name": "new_orga",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"ademe\",\r\n    \"admin\": {\r\n        \"email\": \"a@aa.a25\",\r\n        \"password\": \"a\",\r\n        \"username\": \"user25\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DN}}organismes",
+							"host": [
+								"{{DN}}organismes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get orgas",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"ademe\",\r\n  \"admin\":\r\n  {\r\n    \"email\": \"a@aa.a4\",\r\n    \"password\": \"a\",\r\n    \"username\": \"user4\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DN}}organismes",
+							"host": [
+								"{{DN}}organismes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "auth_admin cap3c",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonResponse = pm.response.json();\r",
+									"pm.globals.set(\"oauth_token\", jsonResponse.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"admin@cap3c.net\",\r\n  \"username\": \"admin\",\r\n  \"password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DN}}auth",
+							"host": [
+								"{{DN}}auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create_support",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"support3@cap3c.net\",\r\n  \"password\": \"a\",\r\n  \"username\": \"user13\",\r\n  \"organisme\": \"/organismes/17\",\r\n  \"roles\": [\"ROLE_cap3c_support_tech\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DN}}users",
+							"host": [
+								"{{DN}}users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "auth_support",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonResponse = pm.response.json();\r",
+									"pm.globals.set(\"oauth_token\", jsonResponse.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"support3@cap3c.net\",\r\n  \"username\": \"user\",//useless\r\n  \"password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DN}}auth",
+							"host": [
+								"{{DN}}auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "auth_admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonResponse = pm.response.json();\r",
+									"pm.globals.set(\"oauth_token\", jsonResponse.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"a@aa.a25\",\r\n  \"username\": \"admin\",//useless\r\n  \"password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DN}}auth",
+							"host": [
+								"{{DN}}auth"
+							],
+							"query": [
+								{
+									"key": "_switch_user",
+									"value": "user92",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create_user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"a@aa.a93\",\r\n  \"password\": \"a\",\r\n  \"username\": \"user93\",\r\n  \"organisme\": \"/organismes/17#useless\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DN}}users",
+							"host": [
+								"{{DN}}users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "auth_user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonResponse = pm.response.json();\r",
+									"pm.globals.set(\"oauth_token\", jsonResponse.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"a@aa.a93\",\r\n  \"password\": \"1234\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DN}}auth",
+							"host": [
+								"{{DN}}auth"
+							],
+							"query": [
+								{
+									"key": "_switch_user",
+									"value": "user92",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"user@example.com\",\r\n  \"password\": \"abcde\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DN}}user",
+							"host": [
+								"{{DN}}user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "auth_etude",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonResponse = pm.response.json();\r",
+									"pm.globals.set(\"oauth_token\", jsonResponse.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"etude@cap3c.net\",\r\n  \"password\": \"1234\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DN}}auth",
+							"host": [
+								"{{DN}}auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create_etude",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "clientId",
+									"value": "STe5vI23SkR5KFbEvG0v9K6fWfyzNRe4eqrRnTHr",
+									"type": "string"
+								},
+								{
+									"key": "clientSecret",
+									"value": "x5Wwe68IrV34Zm2zqn1IFdKlKPJ9VKroMvdXThqQ7XVDQgxfAtl7n6bZCQFP5f8tm4a1WhSEfA1pdWTQXO6qGo8RAR1pbTJzv3GlxILghjVyqxxkwsxoJZeovdmtXLCq",
+									"type": "string"
+								},
+								{
+									"key": "authUrl",
+									"value": "http://192.168.1.70:9001/oauth2",
+									"type": "string"
+								},
+								{
+									"key": "scope",
+									"value": "openid profile email",
+									"type": "string"
+								},
+								{
+									"key": "tokenName",
+									"value": "name",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "http://192.168.1.70:9000/application/o/token/",
+									"type": "string"
+								},
+								{
+									"key": "useBrowser",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"etude@cap3c.net\",\r\n  \"password\": \"a\",\r\n  \"username\": \"etude\",\r\n  \"organisme\": \"/organismes/3\",\r\n  \"roles\": [\"ROLE_cap3c_R&D\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DN}}users",
+							"host": [
+								"{{DN}}users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change_orga_support",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"ademe1\",\r\n    \"admin\": {\r\n        \"email\": \"a@aa.a7\",\r\n        \"password\": \"a\",\r\n        \"username\": \"user7\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DN}}support/3",
+							"host": [
+								"{{DN}}support"
+							],
+							"path": [
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sharedesc",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"/users/3\",\r\n    \"shareId\": \"113e50e2-5743-423e-a45a-c53bba5cef26\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DN}}shareTable",
+							"host": [
+								"{{DN}}shareTable"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "gets",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DN}}users",
+							"host": [
+								"{{DN}}users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DN}}user",
+							"host": [
+								"{{DN}}user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "test_login",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"asd\":\"asd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DN}}login",
+							"host": [
+								"{{DN}}login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "test_login auth",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessTokenUrl",
+									"value": "http://192.168.1.70:9000/application/o/authorize/",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "string"
+								},
+								{
+									"key": "useBrowser",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "authUrl",
+									"value": "http://192.168.1.70:9001/oauth2",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "STe5vI23SkR5KFbEvG0v9K6fWfyzNRe4eqrRnTHr",
+									"type": "string"
+								},
+								{
+									"key": "clientSecret",
+									"value": "x5Wwe68IrV34Zm2zqn1IFdKlKPJ9VKroMvdXThqQ7XVDQgxfAtl7n6bZCQFP5f8tm4a1WhSEfA1pdWTQXO6qGo8RAR1pbTJzv3GlxILghjVyqxxkwsxoJZeovdmtXLCq",
+									"type": "string"
+								},
+								{
+									"key": "scope",
+									"value": "openid profile email",
+									"type": "string"
+								},
+								{
+									"key": "tokenName",
+									"value": "name",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "client_authentication",
+									"value": "body",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "grafanalorr",
+									"type": "string"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "qweqwe",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"asd\":\"asd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DN}}login",
+							"host": [
+								"{{DN}}login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get mtm",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "string"
+								},
+								{
+									"key": "client_authentication",
+									"value": "body",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "http://192.168.1.70:9000/application/o/token",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "grafanalorr",
+									"type": "string"
+								},
+								{
+									"key": "useBrowser",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "authUrl",
+									"value": "http://192.168.1.70:9000/application/o/authorize/",
+									"type": "string"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "qweqwe",
+									"type": "string"
+								},
+								{
+									"key": "clientSecret",
+									"value": "x5Wwe68IrV34Zm2zqn1IFdKlKPJ9VKroMvdXThqQ7XVDQgxfAtl7n6bZCQFP5f8tm4a1WhSEfA1pdWTQXO6qGo8RAR1pbTJzv3GlxILghjVyqxxkwsxoJZeovdmtXLCq",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "STe5vI23SkR5KFbEvG0v9K6fWfyzNRe4eqrRnTHr",
+									"type": "string"
+								},
+								{
+									"key": "scope",
+									"value": "openid profile email",
+									"type": "string"
+								},
+								{
+									"key": "tokenName",
+									"value": "name",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.1.70:9000/application/o/userinfo/",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"1",
+								"70"
+							],
+							"port": "9000",
+							"path": [
+								"application",
+								"o",
+								"userinfo",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get auth",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "STe5vI23SkR5KFbEvG0v9K6fWfyzNRe4eqrRnTHr",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "x5Wwe68IrV34Zm2zqn1IFdKlKPJ9VKroMvdXThqQ7XVDQgxfAtl7n6bZCQFP5f8tm4a1WhSEfA1pdWTQXO6qGo8RAR1pbTJzv3GlxILghjVyqxxkwsxoJZeovdmtXLCq",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://192.168.1.70:9000/application/o/token/",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"1",
+								"70"
+							],
+							"port": "9000",
+							"path": [
+								"application",
+								"o",
+								"token",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "key userinfo",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "string"
+								},
+								{
+									"key": "clientSecret",
+									"value": "H0i96HjP8DSExUYX2zHN8fHxzkSn8uz8",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "lorrUI",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "http://192.168.1.70:7080/realms/lorr/protocol/openid-connect/token",
+									"type": "string"
+								},
+								{
+									"key": "authUrl",
+									"value": "http://192.168.1.70:7080/realms/lorr/protocol/openid-connect/auth",
+									"type": "string"
+								},
+								{
+									"key": "scope",
+									"value": "openid profile email",
+									"type": "string"
+								},
+								{
+									"key": "tokenName",
+									"value": "name",
+									"type": "string"
+								},
+								{
+									"key": "useBrowser",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.1.70:7080/realms/lorr/protocol/openid-connect/userinfo",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"1",
+								"70"
+							],
+							"port": "7080",
+							"path": [
+								"realms",
+								"lorr",
+								"protocol",
+								"openid-connect",
+								"userinfo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "key test login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-grafana-user",
+								"value": "esda@ca.cx",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{DN}}user",
+							"host": [
+								"{{DN}}user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "tableDynamique",
+			"item": [
+				{
+					"name": "test_table_dyn",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"data\":\r\n    {\r\n        \"t_str1\": \"asdads\",\r\n        \"t_str2\": \"iytejn\",\r\n        \"t_str3\": \"xttt\",\r\n        \"t_str4\": \"qwetf\",\r\n        \"t_int1\": {{$randomInt}},\r\n        \"t_int2\": {{$randomInt}},\r\n        \"t_int3\": {{$randomInt}},\r\n        \"t_int4\": {{$randomInt}},\r\n        \"t_float\": {{$randomInt}}.{{$randomInt}},\r\n        \"t_date\": \"today\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DN}}tables/f6c7aab0-275a-433d-89f3-7d0e0a31fcea/IntAndStr",
+							"host": [
+								"{{DN}}tables"
+							],
+							"path": [
+								"f6c7aab0-275a-433d-89f3-7d0e0a31fcea",
+								"IntAndStr"
+							],
+							"query": [
+								{
+									"key": "int2",
+									"value": "between:1..10000",
+									"disabled": true
+								},
+								{
+									"key": "str3",
+									"value": "partial:yr",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "test_table_dyn",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-grafana-user",
+								"value": "esda@ca.cx",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"test1\",\r\n    \"categorie\": \"7e20d952-46a5-4ff6-b2db-8070cfac45d8\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DN}}tables/f6c7aab0-275a-433d-89f3-7d0e0a31fcea/IntAndStr",
+							"host": [
+								"{{DN}}tables"
+							],
+							"path": [
+								"f6c7aab0-275a-433d-89f3-7d0e0a31fcea",
+								"IntAndStr"
+							],
+							"query": [
+								{
+									"key": "t_int2",
+									"value": "between:55..10000",
+									"disabled": true
+								},
+								{
+									"key": "t_int2",
+									"value": "gt:2",
+									"disabled": true
+								},
+								{
+									"key": "t_int2",
+									"value": "gte:4",
+									"disabled": true
+								},
+								{
+									"key": "t_int2",
+									"value": "lt:54",
+									"disabled": true
+								},
+								{
+									"key": "t_int2",
+									"value": "lte:43",
+									"disabled": true
+								},
+								{
+									"key": "t_str3",
+									"value": "partial:ss",
+									"disabled": true
+								},
+								{
+									"key": "t_str3",
+									"value": "exact:ss",
+									"disabled": true
+								},
+								{
+									"key": "t_str3",
+									"value": "start:ss",
+									"disabled": true
+								},
+								{
+									"key": "t_str3",
+									"value": "end:tt",
+									"disabled": true
+								},
+								{
+									"key": "t_str3",
+									"value": "word_start:ss",
+									"disabled": true
+								},
+								{
+									"key": "field",
+									"value": "t_int1,t_int2,id",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "test_table_dyn",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"test1\",\r\n    \"categorie\": \"7e20d952-46a5-4ff6-b2db-8070cfac45d8\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DN}}tables/7101a58d-902b-4492-aa44-72e223073829/IntAndStr2/2",
+							"host": [
+								"{{DN}}tables"
+							],
+							"path": [
+								"7101a58d-902b-4492-aa44-72e223073829",
+								"IntAndStr2",
+								"2"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "test_table_dyn",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"data\":\r\n    {\r\n        \"t_int2\": 123525,\r\n        \"t_int3\": 3264,\r\n        \"t_int4\": 723,\r\n        \"t_str1\": \"cayaer\",\r\n        \"t_str2\": \"iytejn\",\r\n        \"t_str3\": \"xttt\",\r\n        \"t_str4\": \"qwetf\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DN}}tables/7101a58d-902b-4492-aa44-72e223073829/IntAndStr2/1",
+							"host": [
+								"{{DN}}tables"
+							],
+							"path": [
+								"7101a58d-902b-4492-aa44-72e223073829",
+								"IntAndStr2",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "permission",
+			"item": [
+				{
+					"name": "new permission",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"users\": \"/users/306c1daa-0b28-4a3b-b6a5-8b390500ab38\",\r\n    \"tables\": \"/tables/f6c7aab0-275a-433d-89f3-7d0e0a31fcea\",\r\n    \"value\": \"f\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DN}}permissions",
+							"host": [
+								"{{DN}}permissions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "gets permission",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"users\": \"/users/1\",\r\n  \"tables\": \"/tables/600a1d11-0057-4ec4-a02d-b4d5cb061599\",\r\n  \"value\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DN}}permissions/e74bdfae-604d-466c-862b-21e01c6b52e1",
+							"host": [
+								"{{DN}}permissions"
+							],
+							"path": [
+								"e74bdfae-604d-466c-862b-21e01c6b52e1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get permission",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-grafana-user",
+								"value": "esda@ca.cx",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"users\": \"/users/1\",\r\n  \"tables\": \"/tables/600a1d11-0057-4ec4-a02d-b4d5cb061599\",\r\n  \"value\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DN}}permissions",
+							"host": [
+								"{{DN}}permissions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Permission",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"value\": \"5\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DN}}permissions/0f6a42e9-034b-470c-a667-737968789075",
+							"host": [
+								"{{DN}}permissions"
+							],
+							"path": [
+								"0f6a42e9-034b-470c-a667-737968789075"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{oauth_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "DN",
+			"value": "http://localhost:8080/",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "DN",
+			"value": "http://192.168.1.70:8080/",
+			"type": "string"
+		}
+	]
+}
