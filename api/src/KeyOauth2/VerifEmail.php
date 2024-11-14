@@ -50,8 +50,8 @@ class VerifEmail extends OAuth2Authenticator implements AuthenticationEntrypoint
 
         #dd( $accessToken);
 
-        #dump($email);
-        #dd($user->getId());
+        dump($email);
+        //dd($user->getId());
         return new SelfValidatingPassport(
             new UserBadge("", function() use ($user) {
                 return $user;

@@ -2,6 +2,7 @@
 
 namespace App\State\Processor;
 
+use Doctrine\Persistence\ManagerRegistry;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
 use App\Repository\DescRepository;
@@ -19,7 +20,7 @@ use Shuchkin\SimpleXLSX;
 
 class FillTableProcessor implements ProcessorInterface
 {
-    public function __construct(private ProcessorInterface $decorated, private DescRepository $descR, private UserRepository $userR, private Security $security, private TableRepository $tableR, private TableDynamiqueRepository $dynaR)
+    public function __construct(private ManagerRegistry $registry, private ProcessorInterface $decorated, private DescRepository $descR, private UserRepository $userR, private Security $security, private TableRepository $tableR, private TableDynamiqueRepository $dynaR)
     {}
 
 
@@ -36,77 +37,148 @@ class FillTableProcessor implements ProcessorInterface
         dump($header);
         dump($records);
  */
-        /*
         if (!($xlsx = SimpleXLSX::parse('media/'.$data->filePath)))
             dd(SimpleXLSX::parseError());
-        foreach ($xlsx->rows() as $r) {
-             print_r( $r );
-        }
-         */
 
 
 
 
-        dd($data);
-        
-        #dd($this->descR->findAll());
-        $descc = $data->table->getCategorie();
-        #$desc = $this->descR->findAll()[0];
-        $desc = $this->descR->findDesc($descc)[0];//use name ?probably?
-        #dd($desc);
-
-        #dd($uriVariables);
-
-        //----------------------------verification
-        if (sizeof($header) != sizeof($desc->getDescriptionArray()))
-            dd("not same size");
-        foreach ($header as $key)
-            if (!isset($desc->getDescriptionArray()[$key]))
-                dd("not same name");
-        //--------------------------enregistrment
-        foreach($csv as $records)
-        {
-            #$desc->getDescriptionArray()
-            $datatmp = [];
-            foreach ($records as $name => $value) //add all propriete
-            {
-                dump($desc->getDescriptionArray()[$name]);
-                switch ($desc->getDescriptionArray()[$name])
-                {
-                    case "text":
-                        if (!is_string($value))
-                            dd("not a text");
-                        $datatmp[$name] = $value; 
-                        break;
-                    case "integer":
-                        #dd($value);
-                        if (!is_numeric($value))
-                            dd("not a integer");
-                        $datatmp[$name] = intval($value); 
-                        break;
-                    case "float":
-                        #dd($value);
-                        if (!is_numeric($value))
-                            dd("not a float");
-                        $datatmp[$name] = floatval($value); 
-                        break;
-                    case "date": //verif later
-                        $datatmp[$name] = $value; 
-                        #dd($value);
-                        #if (!is_date($value))
-                        #    dd("not a integer");
-                        break;
-                }
-
-            }
-            $result = $this->dynaR->saveInTable($datatmp, $desc, $data->table->getId(), false);
-        }
-
+        $descs = $this->descR->findDesc($data->table->getCategorie());
+        #dd($descs);
+        #if($data->getDescName() !== "readFile")
         #dd($data);
-        $this->dynaR->flush();
+        $tableId = $data->table->getId();
+        if(!$xlsx->sheetName(1))//possibility of one big fiel
+        {
+            #if ($this->saveAll($data->getDescName(), $descs, $xlsx, $data->iteration, 0))
+            if ($this->saveAll($descs, $xlsx, $data->iteration, 0, $tableId))
+                $data->iteration = -1;
+            else
+                $data->iteration = $data->iteration + 1;
+        }
+        else
+        {
+            if (!$xlsx->sheetName($data->iteration))
+                return null;
+            $this->saveAll($descs, $xlsx, 0, $data->iteration, $tableId);
 
-        #$parameter = json_decode($request->getContent(), true);
-        #dd($parameter);
-        #dd($request);
+            $data->iteration = $data->iteration + 1;
+            if (!$xlsx->sheetName($data->iteration))
+                $data->iteration = -1;
+        }
+        return ($data);
+
+    }
+    private function saveAll($descs, $xlsx, $iteration, $sheetInc, $tableId)
+    {
+        $name = $xlsx->sheetName($sheetInc);
+        if (!($desc = $this->getDesc($name, $descs)))
+            dd("name of sheet '".$name."' don't have correspondance in description, TODO replace this message");
+        dump($desc);
+        if (!($meta = $this->verifyMetaData($desc, $xlsx, $sheetInc)))
+            dd("your description and your data of '".$name."' don't correpond, change message");
+        dump($meta);
+
+        return $this->saveData($iteration, $xlsx, $meta, $sheetInc, $desc, $tableId);
+    }
+
+
+    //=====================select desc in table================================
+    private function getDesc($dataName, $descs)
+    {
+        for ($inc = 0; $inc <= sizeof($descs) - 1; $inc++)
+            if ($descs[$inc]->getName() === $dataName)
+                return $descs[$inc];
+        return null;
+        //retrive descSelect
+
+    }
+
+    //=====================meta name================================
+    private function verifyMetaData($desc, $xlsx, $sheetInc)
+    {
+        $attributPlace = [];
+        foreach ($desc->getDescriptionArray() as $colName => $colType)
+        {
+            $place = 0;
+            $exist = false;
+            foreach ($xlsx->rows($sheetInc, 1)[0] as $colData)
+            {
+                if ($colData === $colName)
+                {
+                    $attributPlace[$colData] = $place;
+                    $exist = true;
+                    //dump($colData);
+                    break;
+                }
+                $place++;
+            }
+            if (!$exist)
+                return null;
+        }
+        return $attributPlace;
+
+
+        dump($attributPlace);
+
+        //$result = $this->dynaR->saveInTable($data->data, $descs[$descSelect], $uriVariables["id"], true);
+        //$result = $this->dynaR->saveInTable($data->data, $descs[$descSelect], $uriVariables["id"], true);
+
+        //retrive attributPlace
+        //
+        //
+
+    }
+
+    //=====================save data================================
+    private function saveData($iteration, $xlsx, $attributPlace, $sheetInc, $desc, $tableId)
+    {
+        $constDataInterval = 1000;
+        $constChunkInterval = 20;
+        #$firstPace = true;
+        $dataInterval = 0;
+        $chunkInterval = 0;
+        $skipData = $constDataInterval * $constChunkInterval * $iteration + 1;
+        dump(memory_get_usage());
+        $dataSave = [];
+        #foreach ($xlsx->rows() as $r)
+        #dd($data->iteration);
+
+        dump($attributPlace);
+
+        dump($sheetInc);
+        foreach ($xlsx->readRows($sheetInc) as $r)
+        {
+            if ($skipData)
+            {
+                dump($r);
+                $skipData--;
+                continue;
+            }
+
+            foreach($attributPlace as $key => $val)
+            {
+                $dataSave[$key] = $r[$val];
+            }
+            #dump($dataSave);
+            $this->dynaR->saveInTable($dataSave, $desc, $tableId, false, $dataInterval);
+
+            #dump(memory_get_usage());
+            $dataInterval++;
+            if ($dataInterval == $constDataInterval)
+            {
+                $dataInterval = 0;
+                $chunkInterval++;
+                $this->dynaR->flush();
+                if ($chunkInterval == $constChunkInterval)
+                    return false;
+                #dd("asd");
+            }
+
+
+        }
+        $this->dynaR->flush();
+        //===================================================================
+        return true;
     }
 }

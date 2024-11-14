@@ -20,31 +20,41 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use App\Entity\User;
 use App\Entity\Desc;
 use App\State\Processor\FillTableProcessor;
+use App\State\Provider\FileDescProvider;
+use App\State\Provider\BaseUploaderProvider;
 use Symdony\Component\Validator\Constraints\NotBlank;
 use Symdony\Component\Validator\Constraints\NotNull;
 
 #[Vich\Uploadable]
 #[ORM\Entity]
 #[ApiResource(
-    
     security: "is_granted('ROLE_CREATE_BASE')",
     types: ['https://schema.org/BaseUploader'],
 )]
 #[Get(
-    normalizationContext: ['groups' => ['base_uploader:read']], 
+    normalizationContext: ['groups' => ['base_uploader:read']],
 )]
 
 #[GetCollection(
-    normalizationContext: ['groups' => ['base_uploader:read']], 
+    normalizationContext: ['groups' => ['base_uploader:read']],
+    provider: BaseUploaderProvider::class,
+)]
+
+#[Get(
+    uriTemplate: '/fileDesc/{id}',
+    requirements: ['id'],
+    uriVariables: ['id' => 'id'],
+    normalizationContext: ['groups' => ['base_uploader:read']],
+    provider: FileDescProvider::class,
 )]
 
 #[Post(
     uriTemplate: '/uploader',
-    normalizationContext: ['groups' => ['base_uploader:read']], 
-    denormalizationContext: ['groups' => ['base_uploader:create']], 
-    controller: CreateBaseUploaderAction::class, 
-    deserialize: false, 
-    validationContext: ['groups' => ['Default', 'base_uploader_create']], 
+    normalizationContext: ['groups' => ['base_uploader:read']],
+    denormalizationContext: ['groups' => ['base_uploader:create']],
+    controller: CreateBaseUploaderAction::class,
+    deserialize: false,
+    validationContext: ['groups' => ['Default', 'base_uploader_create']],
     openapiContext: [
 'summary' => 'upload a lapin',
 'requestBody' => [
@@ -62,7 +72,7 @@ use Symdony\Component\Validator\Constraints\NotNull;
 #                        'format' => 'path'
 #                    ]
                 ]]]
-    
+
     ],
  "required" => true
 ]])]
@@ -72,7 +82,7 @@ use Symdony\Component\Validator\Constraints\NotNull;
     uriTemplate: '/uploader/{id}',
     requirements: ['id'],
     uriVariables: ['id' => 'id'],
-    denormalizationContext: ['groups' => ['BaseUploader:desc:add']], 
+    denormalizationContext: ['groups' => ['BaseUploader:desc:add']],
     #processor: BaseUploader::class,
     validationContext: ['groups' => ['Default']]
 )]
@@ -80,9 +90,10 @@ use Symdony\Component\Validator\Constraints\NotNull;
 #[Post(
     uriTemplate: '/fill/{id}',
     requirements: ['id'],
-    uriVariables: ['id' => 'id'],//todo add desc.name
-    validationContext: ['groups' => ['Default', 'fill:inTable']], 
+    uriVariables: ['id' => 'id'],
+    validationContext: ['groups' => ['Default', 'fill:inTable']],
     denormalizationContext: ['groups' => ['fill:inTable']],
+    normalizationContext: ['groups' => ['fill:read']],
     security: "is_granted('ROLE_CREATE_BASE')",# or user.getOrganisme().getName() == 'cap3c'",
     processor: FillTableProcessor::class,
 )]
@@ -108,25 +119,36 @@ class BaseUploader
     #[Vich\UploadableField(mapping: "base_uploader", fileNameProperty: "filePath")]
     #[Groups(['base_uploader:create'])]
     #[Assert\NotNull(groups: ['base_uploader_create'])]
+    #[Assert\File(
+        maxSize: '8M',
+        #extensions: ['xlsx'],
+        #extensionsMessage: 'Please upload a valid PDF',
+    )]
     public ?File $file = null;
 
-    #[ORM\Column(nullable: true)] 
+    #[ORM\Column(nullable: true)]
     public ?string $filePath = null;
 
     #[ORM\ManyToOne(inversedBy: 'baseUploaders')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $proprietaire = null;
 
-    #[Groups(['fill:inTable'])]
+    #[Groups(['fill:inTable', 'base_uploader:read'])]
     #[Assert\NotBlank(groups: ["fill:inTable"], allowNull: false)]
     public ?Table $table = null;
+
+    #[Groups(['fill:inTable', 'fill:read'])]
+    public int $iteration = 1;//to avoid to use too much ram
 
     #[ORM\Column(type: Types::GUID, nullable: true)]
     #[Groups(['BaseUploader:desc:add'])]
     private ?string $categorie = null;
-    
+
     public function setTable(Table $table)
     {
+        #$a = "a";
+        #$a *= "a";
+        #dd("asd");
         $this->table = $table;
         return $this;
     }

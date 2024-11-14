@@ -24,7 +24,7 @@ class TableDynamiqueProvider implements ProviderInterface
         dump("provider");
 
         if(isset($uriVariables["id"])) Utils::testUUID($uriVariables["id"], $this->validator);
-        
+
         $user = $this->security->getUser();
         #$this->security->denyAccessUnlessGranted('ROLE_INTERACT_BASE');
         #if ($this->isGranted("ROLE_orga_admin"))
@@ -40,7 +40,7 @@ class TableDynamiqueProvider implements ProviderInterface
         }
 
         if (!$table = $this->tableR->find($uriVariables["id"]))
-            throw new HttpException(500, "you cant see this message");
+            throw new HttpException(500, "you cant normally see this message");
         if (!$desc = $this->descR->findby(array("categorie" => $table->getCategorie(), "name" => $uriVariables["name"])))
             throw new HttpException(400, "The name of the categorie does not refer to this table or has not been found");
 
@@ -76,7 +76,7 @@ class TableDynamiqueProvider implements ProviderInterface
         }
         if ($permMethode == 0)
             return []; //["desc" => $desc];
-        
+
         if ($permMethode == 3 && $operation->getUriTemplate() == "/tables/{id}/{name}/filter")//DELETE
           return ($this->dynaR->getCollection($desc[0], $uriVariables["id"], $context, $permMethode));
         $result = ($this->dynaR->getById($desc[0], $uriVariables["id"], $uriVariables["idInTable"]));

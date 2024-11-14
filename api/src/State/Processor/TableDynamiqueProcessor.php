@@ -24,12 +24,16 @@ class TableDynamiqueProcessor implements ProcessorInterface
         $table = $this->tableR->find($uriVariables["id"]);
         $desc = $this->descR->findby(array("categorie" => $table->getCategorie(), "name" => $uriVariables["name"]));
 
-       
-        $result = NULL;
+
         if ($operation->getMethod() == "PUT")
-            $result = $this->dynaR->changeInTable($data->data, $context["previous_data"], $desc[0], $uriVariables, true);
+            $this->dynaR->changeInTable($data->data, $context["previous_data"], $desc[0], $uriVariables, true);
         else if ($operation->getMethod() == "POST")
-            $result = $this->dynaR->saveInTable($data->data, $desc[0], $uriVariables["id"], true);
+        {
+            dump($data->data);
+            dump($desc[0]);
+            dump($uriVariables["id"]);
+            $this->dynaR->saveInTable($data->data, $desc[0], $uriVariables["id"], true);
+        }
         else if ($operation->getMethod() == "DELETE")
         {
             foreach ($data as $dyna_sup)

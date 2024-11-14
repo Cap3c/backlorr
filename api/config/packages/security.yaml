@@ -34,11 +34,11 @@ security:
             jwt: ~
 
 
-        oauth:
-            pattern: ^/koauth2
-            custom_authenticators:
-                - App\KeyOauth2\KeycloakConnect
-                #- App\KeyOauth2\KeycloakVerif
+        #oauth:
+        #    pattern: ^/koauth2
+        #    custom_authenticators:
+        #        - App\KeyOauth2\KeycloakConnect
+        #        #- App\KeyOauth2\KeycloakVerif
             
 
         auth:
@@ -55,12 +55,13 @@ security:
 
         main:
 
-            #jwt: ~
-            #lazy: true
+            jwt: ~
             custom_authenticators:
                 - App\KeyOauth2\VerifEmail
                 #- App\KeyOauth2\KeycloakConnect
             #  - App\Security\Authentik2
+            entry_point : App\KeyOauth2\VerifEmail
+            lazy: true
             stateless: true
             security: true
             provider: app_user_provider
@@ -83,11 +84,12 @@ security:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/auth, roles: PUBLIC_ACCESS }
-        - { path: ^/oauth2, roles: PUBLIC_ACCESS }
-        - { path: ^/koauth2, roles: PUBLIC_ACCESS }
-        - { path: ^/login, roles: PUBLIC_ACCESS }
+          #- { path: ^/oauth2, roles: PUBLIC_ACCESS }
+          #- { path: ^/koauth2, roles: PUBLIC_ACCESS }
+          #- { path: ^/login, roles: PUBLIC_ACCESS }
         - { path: ^/support, roles: ROLE_cap3c_support_tech }
         - { path: ^/docs, roles: PUBLIC_ACCESS } # Allows accessing API documentations and Swagger UI docs
+          #- { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
           #- { path: ^/, roles: PUBLIC_ACCESS }
 

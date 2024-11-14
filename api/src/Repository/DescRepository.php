@@ -33,6 +33,8 @@ class DescRepository extends ServiceEntityRepository
         foreach($array as $name => $type)
         {
             dump($name);
+            if (!preg_match('/^[a-zA-Z0-9_]+$/', $name))
+                throw new HttpException(422, $name." need to be constitued of leter or underscore");
             if (!is_string($type))
                 throw new HttpException(422, $type." need to be a string");
             if ($type === "id")
@@ -104,7 +106,7 @@ class DescRepository extends ServiceEntityRepository
 
     public function findDesc(mixed $categorie, ?string $name = null)
     {
-    
+
         if ($name)
             $result = $this->findby(["categorie" => $categorie, 'name' => $name]);
         else

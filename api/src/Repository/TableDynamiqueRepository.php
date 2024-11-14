@@ -29,6 +29,8 @@ class TableDynamiqueRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, TableDynamique::class);
     }
+    private $meta;
+    private $limit = 1000;
 
     private function getMetadataDesc(Desc $desc, string $table_id, $meta)
     {
@@ -46,6 +48,7 @@ class TableDynamiqueRepository extends ServiceEntityRepository
                 "columnName" => $name,
             );
             $tmp["type"] = $type;
+            dump($tmp);
             $meta->addInheritedFieldMapping($tmp);//add new column
         }
         $meta->setPrimaryTable(array("name" => '`'.$name_table));//the name of table need to be differente
@@ -106,21 +109,29 @@ class TableDynamiqueRepository extends ServiceEntityRepository
 
     private function _insertInTable($attr, $dyna, $data, $name, $meta)
     {
-        dump($data);
+        #dump($data);
         #dd($attr);//integer1
         #dd($meta->fieldMappings[$name]["type"]);
         $test_type;
         switch ($meta->fieldMappings[$name]["type"])
         {
             case "integer":
-                $test_type = is_int($data[$name]);
-                if ($test_type && (-2147483648 > $data[$name] || $data[$name] > 2147483647))
-                    throw new HttpException(422, "Field ".$name." value must be between -2147483648 and 2147483647");
-                $dyna->$attr = $data[$name];
+                $dataCast = (int) ($data[$name]);
+                $test_type = is_int($dataCast);
+                if ($test_type && (-2147483648 > $dataCast || $dataCast > 2147483647))
+                {
+                    throw new HttpException(422, "Field ".$name." value must be between -2147483648 and 2147483647, value ".$dataCast." is entered");
+                }
+                $dyna->$attr = $dataCast;
+                #$test_type = is_int($data[$name]);
+                #if ($test_type && (-2147483648 > $data[$name] || $data[$name] > 2147483647))
+                #    throw new HttpException(422, "Field ".$name." value must be between -2147483648 and 2147483647");
+                #$dyna->$attr = $data[$name];
                 break;
             case "text":
-                $test_type = is_string($data[$name]);
-                $dyna->$attr = $data[$name];
+                #$test_type = is_string($data[$name]);
+                $test_type = isset($data[$name]);
+                $dyna->$attr = (string) $data[$name];
                 break;
             case "float":
                 $test_type = is_float($data[$name]) || is_integer($data[$name]);
@@ -159,27 +170,63 @@ class TableDynamiqueRepository extends ServiceEntityRepository
         $this->getEntityManager()->merge($dyna);
         if ($flush)
             $this->getEntityManager()->flush();
-        return $dyna;
+        unset($dyna);
+        #return $dyna;
     }
+    #private int $aaa = 0;
 
-    public function saveInTable(array $data, desc $desc, string $id, bool $flush = false)
+    public function saveInTable(array $data, desc $desc, string $id, bool $flush = false, int $interval = 0)
     {
         #dd($data);
+        #if(!isset($this->dyna[$interval]))
+        #if(isset($this->dyna[$interval]))
+        #{
+        #    #$this->dyna[$interval]->ResetObject();
+        #    unset($this->dyna[$interval]);
+        #    $this->dyna[$interval] = null;
+        #}
+        #if(!isset($this->dyna[$interval]))
+        #$this->dyna[$interval] = new TableDynamique;
+        #$dyna = $this->dyna[$interval];
         $dyna = new TableDynamique;
-        $meta = $this->getMetadataDesc($desc, $id, $this->getClassMetadata());
+        #$dyna->setRelation_one(null);
+        #dump($dyna);
+        #if ($this->aaa === 5)
+        #    dd("asd");
+        #$this->aaa += 1;
+
+        #$dyna->setId(null);
+
+        #dd($dyna);
+
+        #dd($this->getEntityManager());
+        if (!isset($this->meta))
+        {
+            $this->meta = $this->getMetadataDesc($desc, $id, $this->getClassMetadata());
+            foreach($this->getAttr($desc) as $name => $attr)
+            {
+                $this->meta->reflFields[$name] = new ReflectionProperty("App\Entity\TableDynamique", $attr);
+            }
+            #dump($this->meta);
+        }
+
 
         foreach($this->getAttr($desc) as $name => $attr)
         {
             if (!isset($data[$name]))
                 throw new HttpException(422, $name." is not defined");
-            $this->_insertInTable($attr, $dyna, $data, $name, $meta);
-
-            $meta->reflFields[$name] = new ReflectionProperty("App\Entity\TableDynamique", $attr);
+            $this->_insertInTable($attr, $dyna, $data, $name, $this->meta);
         }
+
+        #dump($this->dyna[0]);
+        #dump($dyna);
         $this->getEntityManager()->persist($dyna);
         if ($flush)
-            $this->getEntityManager()->flush();
-        return $dyna;
+            $this->flush();
+        #$dyna = null;
+        #dump($this->dyna[0]);
+        return null;
+        #return $dyna;
     }
 
     public function getById(desc $desc, string $table_uuid, int $id)
@@ -219,6 +266,7 @@ class TableDynamiqueRepository extends ServiceEntityRepository
     public function flush()
     {
         $this->getEntityManager()->flush();
+        $this->getEntityManager()->clear();
     }
 
     //    /**
@@ -232,6 +280,7 @@ class TableDynamiqueRepository extends ServiceEntityRepository
         $search = new SearchFilter();
         $rand = 0;
         #$range->filterProperty('gt', "int2", 4, $qb, $QNG, 'p', context : $filter);
+        $qb->setMaxResults($this->limit);
         foreach($filter as $key => $value)
         {
             dump($key);
@@ -252,7 +301,9 @@ class TableDynamiqueRepository extends ServiceEntityRepository
             }
             else if ($key == "rand")
                 $rand = intval($value);
-            else 
+            else if ($key == "offset")
+                $qb->setFirstResult($this->limit * $value);
+            else
             {
                 dump("where");
                 dump($meta->fieldMappings);
@@ -276,7 +327,7 @@ class TableDynamiqueRepository extends ServiceEntityRepository
             }
         }
         #$qb->orderBy('t_int1');
-        if ($permMethode == 1)
+        if ($permMethode == 1) //get
             $result = $qb->getQuery()->getArrayResult();
         else
             $result = $qb->getQuery()->getResult();

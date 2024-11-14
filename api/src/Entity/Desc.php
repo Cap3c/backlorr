@@ -179,7 +179,7 @@ class Desc
     ##[ORM\ManyToOne(inversedBy: 'descs', mappedBy: "user")]
     ##[ORM\JoinColumn(nullable: false, referencedColumnName: "id")]
     #private ?User $proprietaire = null;
-    
+
     ##[Groups(["individual:read", "individual:write"])]
     ##[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'relatedDesc')]
     #private Collection $partagePrive;

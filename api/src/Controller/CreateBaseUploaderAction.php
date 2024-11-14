@@ -26,20 +26,25 @@ final class CreateBaseUploaderAction extends AbstractController
         #    throw new BadRequestHttpException("user can't send base");
         $user = $this->security->getUser();
 
+
         $uploadedFile = $request->files->get('file');
         #dd($request);
         if (!$uploadedFile)
             throw new BadRequestHttpException('"file" is required');
 
-
         if (!($xlsx = SimpleXLSX::parse($uploadedFile)))
             dd(SimpleXLSX::parseError());
+        if (filesize($uploadedFile) > 2000000 && $xlsx->sheetName(1))
+            throw new BadRequestHttpException('< 2mega or only one sheet');
+
+
         #foreach ($xlsx->rows() as $r)
         #     print_r( $r );
         $baseUploader = new BaseUploader();
         $baseUploader->file = $uploadedFile;
         $baseUploader->setProprietaire($this->security->getUser());
 
+        dump($baseUploader);
         return $baseUploader;
     }
 }

@@ -24,7 +24,7 @@ class TableDynamique
     #[ORM\Id]
     #[ORM\Column()]
     #[ApiProperty(identifier: true)]
-    #[ORM\GeneratedValue(strategy : "IDENTITY")] 
+    #[ORM\GeneratedValue(strategy : "IDENTITY")]
     private ?int $id = NULL;
 
     ##[ORM\Column(length: 255)]
@@ -76,6 +76,14 @@ class TableDynamique
     public ?\DateTimeInterface $date5 = null;
  */
 
+    function ResetObject() {
+        foreach ($this as $key => $value) {
+            unset($this->$key);
+        }
+            #unset($this->relation_one);
+            #unset($this->id);
+    }
+
     #[ORM\ManyToOne(inversedBy: 'relation_one')]
     private ?TableDynamique $relation_many = null;
 
@@ -92,7 +100,7 @@ class TableDynamique
         //dd($date2);
     }
 
-    public function setId(int $id): self
+    public function setId(?int $id): self
     {
         $this->id = $id;
         return $this;

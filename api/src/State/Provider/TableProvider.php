@@ -60,10 +60,10 @@ class TableProvider implements ProviderInterface
     public function provide(Operation $operation, array $uriVariables = [], array $context = []): object|array|null
     {
         if(isset($uriVariables["id"])) Utils::testUUID($uriVariables["id"], $this->validator);
-        dump("provide information");
-        dump($uriVariables);
-        dump($operation);
-        dump($context);
+        #dump("provide information");
+        #dump($uriVariables);
+        #dump($operation);
+        #dump($context);
         if ($operation instanceof CollectionOperationInterface)
             return $this->collectionOpe($operation);
         if ($operation instanceof Post)

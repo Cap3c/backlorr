@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\User;
+use App\Controller\KeycloakUser;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -84,6 +85,11 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
     public function save(User $entity, bool $flush = false): void
     {
+
+        $send = new KeycloakUser();
+            $send->sendUser($entity);
+
+        #dd("asd");
         $this->getEntityManager()->persist($entity);
 
         if ($flush) {

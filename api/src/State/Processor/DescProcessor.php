@@ -45,7 +45,7 @@ class DescProcessor implements ProcessorInterface
         if ($description)
             $desc->setDescription($description);
         $this->descR->updateGlobalBoolean($uriVariables["categorie"], $data->getPartagePublic());
-        
+
         ##dd($desc);
         #$this->decorated->process($desc, $operation, $uriVariables, $context);
         return $desc;
@@ -57,6 +57,10 @@ class DescProcessor implements ProcessorInterface
         /*if (!$data->getDescriptionArray() or $data->getDescriptionArray() == [NULL])
             throw new HttpException(422, "description empty");
          */
+
+        //dd($data->getName());
+        if (!preg_match('/^[a-zA-Z0-9_]+$/', $data->getName()))
+            throw new HttpException(422, "the name need to be constitued of leter or underscore");
         $this->descR->isValid($data->getDescriptionArray());
 
         if ($operation->getUriTemplate() == "/descs{._format}")
@@ -68,6 +72,8 @@ class DescProcessor implements ProcessorInterface
         }
         else
         {
+            if($this->descR->findby(["categorie" => $uriVariables["categorie"]]) == [])
+                throw new HttpException(422, "this categorie doesn't exist");
             if ($this->descR->findDoublon($uriVariables["categorie"], $data->getName()))
                 throw new HttpException(422, "this name already exist in this categorie");
             $permNumber = $this->descR->getNumberOfPerm($uriVariables["categorie"]);

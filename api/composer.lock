@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7aaa1dddbc5f6b9878bff2e6ee8bab7c",
+    "content-hash": "b6af8cc015c5df1cdcaca800139f2e66",
     "packages": [
         {
             "name": "api-platform/core",
@@ -257,6 +257,67 @@
                 "source": "https://github.com/Anizoptera/Math/tree/master"
             },
             "time": "2013-05-28T13:04:04+00:00"
+        },
+        {
+            "name": "benjaminfavre/oauth2-http-client",
+            "version": "3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BenjaminFavre/oauth2-http-client.git",
+                "reference": "5f1d6b9be4b2f53748c152b8f402fae41ed12585"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/BenjaminFavre/oauth2-http-client/zipball/5f1d6b9be4b2f53748c152b8f402fae41ed12585",
+                "reference": "5f1d6b9be4b2f53748c152b8f402fae41ed12585",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": "^8.0",
+                "symfony/cache-contracts": "^3.0",
+                "symfony/http-client-contracts": "^3.0"
+            },
+            "provide": {
+                "symfony/http-client-implementation": "^2.3.1"
+            },
+            "require-dev": {
+                "ergebnis/composer-normalize": "^2.28",
+                "phpunit/phpunit": "^9.4.3",
+                "sylius-labs/coding-standard": "^4.2",
+                "symfony/cache": "^6.0",
+                "symfony/http-client": "^6.0",
+                "vimeo/psalm": "^4.26"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "BenjaminFavre\\OAuthHttpClient\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Benjamin Favre",
+                    "email": "favre.benjamin@gmail.com",
+                    "homepage": "https://github.com/BenjaminFavre"
+                }
+            ],
+            "description": "A lightweight OAuth 2 decorator for the Symfony HTTP Client.",
+            "homepage": "https://github.com/BenjaminFavre/oauth2-http-client",
+            "keywords": [
+                "http-client",
+                "oauth",
+                "symfony"
+            ],
+            "support": {
+                "issues": "https://github.com/BenjaminFavre/oauth2-http-client/issues",
+                "source": "https://github.com/BenjaminFavre/oauth2-http-client/tree/3.0.1"
+            },
+            "time": "2022-11-15T12:38:20+00:00"
         },
         {
             "name": "brick/math",

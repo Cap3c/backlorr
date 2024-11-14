@@ -75,8 +75,8 @@ class UserProcessor implements ProcessorInterface
 
         //------------------------save------------------------------
 
-        $result = $this->decorated->process($data, $operation, $uriVariables, $context);
-        #$result = $this->userR->save($data, true);
+        #$result = $this->decorated->process($data, $operation, $uriVariables, $context);
+        $result = $this->userR->save($data, true);
 		// Handle the state
         return $result;
 	}
